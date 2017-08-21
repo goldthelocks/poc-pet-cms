@@ -1,0 +1,59 @@
+<h4>Add Pet</h4>
+
+<form class="form-horizontal" name="petForm" ng-submit="addNewPet(pet)"
+	novalidate>
+
+	<div ng-show="displayError">{{message}}</div>
+
+	<div class="alert alert-success alert-dismissable fade in" ng-show="displaySuccess">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<p>{{message}]</p>
+	</div>
+	
+	<div class="alert alert-danger alert-dismissable fade in" ng-show="displayError">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<p>{{message}]</p>
+	</div>
+
+	<div class="form-group" ng-class='{ "has-error" : petForm.name.$invalid && !petForm.name.$pristine }'>
+		<div class="col-md-4 col-md-offset-4">
+			<label class="control-label">Name</label> 
+			<input name="name" class="form-control" placeholder="Enter Pet Name" type="text"
+				ng-model="pet.petDetails.name" ng-required="true" />
+			<p ng-show="petForm.name.$invalid && !petForm.name.$pristine" class="help-block">Enter a pet name.</p>
+			
+		</div>
+	</div>
+
+	<div class="form-group" ng-class='{ "has-error": petForm.age.$invalid && !petForm.age.$pristine }'>
+		<div class="col-md-4 col-md-offset-4">
+			<label class="control-label">Age</label> 
+			<input name="age" class="form-control" placeholder="Enter pet age" type="number"
+				ng-model="pet.petDetails.age" ng-required="true" />
+			<p ng-show="petForm.age.$invalid && !petForm.age.$pristine" class="help-block">Enter pet age.</p>
+		</div>
+	</div>
+
+	<div class="form-group" ng-class='{ "has-error": petForm.petType.$invalid && !petForm.age.$pristine}'>
+		<div class="col-md-4 col-md-offset-4">
+			<label class="control-label">Pet Type</label>
+			<ui-select ng-model="pet.petType">
+				<ui-select-match placeholder="Select a pet type">
+					<span ng-bind="$select.selected.name"></span>
+				</ui-select-match>
+				<ui-select-choices repeat="petType in petTypes | filter: $select.search">
+					<span ng-bind="petType.name"></span>
+				</ui-select-choices>
+			</ui-select>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-md-4 col-md-offset-4">
+			<button type="submit" class="btn btn-primary"
+				ng-disabled="petForm.$invalid">Add Pet</button>
+			<!-- <input type="submit" value="Add Pet" class="btn btn-primary" /> -->
+		</div>
+	</div>
+
+</form>

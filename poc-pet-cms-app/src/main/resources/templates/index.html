@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="petListApp" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, minimal-ui"/>
+    
+	<base href="/" />
+	
+	<title>Pet Listing</title>
+	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+	
+	<!-- Bootstrap table -->
+	<link rel="stylesheet" th:href="@{/bootstrap-table/dist/bootstrap-table.min.css}"/>
+	<link rel="stylesheet" th:href="@{/angular-ui-select/dist/select.min.css}"/>
+	
+	
+	<script th:src="@{/jquery/jquery.min.js}"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+	
+	<script th:src="@{/angular/angular.js}"></script>
+	<script th:src="@{/angular-ui-router/release/angular-ui-router.min.js}"></script>
+	
+	<script th:src="@{/scripts/app.js}"></script>
+	
+	<script th:src="@{/scripts/pet-list/pet-list.js}"></script>
+	<script th:src="@{/scripts/pet-list/pet-list-controller.js}"></script>
+	
+	<script th:src="@{/scripts/add-pet/add-pet.js}"></script>
+	<script th:src="@{/scripts/add-pet/add-pet-controller.js}"></script>
+
+	<script th:src="@{/bootstrap-table/dist/bootstrap-table.min.js}"></script>
+	<script th:src="@{/angular-ui-select/dist/select.min.js}"></script>
+	
+	
+</head>
+
+<body>
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>					
+				</button>
+				<a class="navbar-brand" href="/">Pet Listing</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/">Home</a></li>
+					<li><a ui-sref="pet-list">View Pet List</a></li>
+					<li><a ui-sref="add-pet">Add Pet</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div id="container">
+		<div class="starter-template">
+			<div ui-view=""></div>
+		</div>
+	</div>
+
+</body>
+
+</html>

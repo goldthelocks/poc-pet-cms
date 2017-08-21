@@ -1,0 +1,23 @@
+{
+	"name": "poc-pet-cms-views",
+	"description": "Pet CMS Views",
+	"authors": [
+		"Eraine"
+	],
+	"private": true,
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"angular": "~1.6.4",
+		"bootstrap": "components/bootstrap#~3.3.7",
+		"jquery": "components/jquery#~3.2.1",
+		"angular-ui-router": "1.0.6",
+		"bootstrap-table": "",
+		"angular-ui-select": ""
+	}
+}

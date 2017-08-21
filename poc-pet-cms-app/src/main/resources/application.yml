@@ -1,0 +1,27 @@
+server.port: 8989
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/petdb?useSSL=false
+    username: root
+    password: password
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+      
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.hibernate: ERROR
+    com.poc.pet.cms.app: ERROR
+    
+endpoints:
+  shutdown:
+    enabled: true
+  sensitive: false
