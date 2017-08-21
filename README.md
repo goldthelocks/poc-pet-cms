@@ -1,9 +1,9 @@
-Technology stack:
+# Technology stack:
 
-Back end:
-Spring
-Spring Rest
-Spring Data JPA
+## Back end:
+* Spring Boot
+* Spring Rest
+* Spring Data JPA
 
-Front end:
-AngularJS 1
+## Front end:
+* AngularJS 1
