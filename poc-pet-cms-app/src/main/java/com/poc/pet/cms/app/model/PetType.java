@@ -53,4 +53,9 @@ public class PetType {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "PetType [id=" + id + ", name=" + name + "]";
+	}
+
 }

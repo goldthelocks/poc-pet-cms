@@ -14,7 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -33,15 +37,19 @@ public class Pet {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "date_added")
 	private Date dateAdded;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name = "update_date")
+	private Date updateDate;
 
 	@Column
 	private String status;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "pet_details_id")
 	private PetDetails petDetails;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "pet_type_id")
 	private PetType petType;
 
@@ -76,6 +84,20 @@ public class Pet {
 	 */
 	public void setDateAdded(Date dateAdded) {
 		this.dateAdded = dateAdded;
+	}
+
+	/**
+	 * @return the updateDate
+	 */
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	/**
+	 * @param updateDate the updateDate to set
+	 */
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 
 	/**
@@ -123,15 +145,28 @@ public class Pet {
 		this.petType = petType;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Pet [id=" + id + ", dateAdded=" + dateAdded + ", status=" + status + ", petDetails=" + petDetails
 				+ ", petType=" + petType + "]";
+	}
+	
+	@PrePersist
+	public void prePersist() {
+		final Date dateNow = new Date();
+		dateAdded = dateNow;
+		updateDate = dateNow;
+	}
+	
+	@PreUpdate
+	public void preUpdate() {
+		final Date dateNow = new Date();
+		
+		if (dateAdded == null) {
+			dateAdded = dateNow;
+		}
+		
+		updateDate = dateNow;
 	}
 
 }

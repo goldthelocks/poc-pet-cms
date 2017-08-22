@@ -11,6 +11,9 @@ import com.poc.pet.cms.app.Application;
 import com.poc.pet.cms.app.model.PetType;
 import com.poc.pet.cms.app.service.PetTypeService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -25,10 +28,22 @@ public class PetTypeServiceTest {
 	@Autowired
 	private PetTypeService petTypeService;
 	
+	@Test
 	public void testSave() {
-		PetType petType = new PetType();
-		petType.setName("dog");
+		List<PetType> petTypes = new ArrayList<>();
 		
-		petTypeService.savePetType(petType);
+		PetType cat = new PetType();
+		cat.setName("cat");
+		
+		PetType dog = new PetType();
+		dog.setName("dog");		
+		
+		petTypes.add(cat);
+		petTypes.add(dog);
+		
+		for (PetType pt : petTypes) {
+			petTypeService.savePetType(pt);
+		}
+		
 	}
 }

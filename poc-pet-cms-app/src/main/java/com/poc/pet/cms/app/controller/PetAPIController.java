@@ -32,12 +32,12 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @Api(value = "PetControllerAPI", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PetAPIController {
-	
+
 	@Autowired
 	private PetService petService;
-	
+
 	private final static Logger logger = LoggerFactory.getLogger(PetAPIController.class);
-	
+
 	@GetMapping("/api/pet/all")
 	@ApiOperation("Get all pets")
 	public ResponseEntity<List<Pet>> listAllPets() {
@@ -45,66 +45,73 @@ public class PetAPIController {
 		if (petList.isEmpty()) {
 			return new ResponseEntity<List<Pet>>(HttpStatus.NO_CONTENT);
 		}
-		
+
 		for (Pet pet : petList) {
 			logger.info(pet.toString());
 		}
-		
+
 		return new ResponseEntity<List<Pet>>(petList, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/api/pet/{id}")
 	@ApiOperation("Get one pet")
 	public ResponseEntity<Pet> findById(@PathVariable("id") Long id) {
 		Pet pet = petService.findById(id);
-		
+
 		if (pet == null) {
 			return new ResponseEntity<Pet>(HttpStatus.NO_CONTENT);
 		}
-		
+
 		return new ResponseEntity<Pet>(pet, HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/api/pet/new")
 	@ApiOperation("Add new pet")
-	public ResponseEntity<?> newPet(@RequestBody Pet pet) {
+	public ResponseEntity<CustomApiResponse> newPet(@RequestBody Pet pet) {
 		Pet tempPet = petService.findByName(pet.getPetDetails().getName());
-		
-		if (tempPet != null) {
-			return new ResponseEntity<>("Pet already exists!", HttpStatus.CONFLICT);
+
+		try {
+			if (tempPet != null) {
+				return new ResponseEntity<CustomApiResponse>(new CustomApiResponse("Pet already exists!"),
+						HttpStatus.CONFLICT);
+			}
+
+			petService.save(pet);
+
+		} catch (Exception e) {
+			return new ResponseEntity<CustomApiResponse>(new CustomApiResponse("Failed to add pet!"),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		petService.save(pet);
-		
-		return new ResponseEntity<>(HttpStatus.OK);
+
+		return new ResponseEntity<CustomApiResponse>(new CustomApiResponse("Successfully added pet!"), HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/api/pet/delete/{id}")
 	@ApiOperation("Delete a pet")
 	public ResponseEntity<?> deletePet(@PathVariable("id") Long id) {
 		Pet pet = petService.findById(id);
-		
+
 		if (!petService.isPetExisting(pet)) {
 			return new ResponseEntity<>("Pet not found", HttpStatus.NO_CONTENT);
 		}
-		
+
 		petService.delete(pet);
-		
+
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
+
 	@PutMapping("/api/pet/update/{id}")
 	@ApiOperation("Update a pet")
 	public ResponseEntity<?> updatePet(@PathVariable("id") Long id, @RequestBody Pet pet) {
 		Pet petFromRepo = petService.findById(id);
-		
+
 		if (!petService.isPetExisting(petFromRepo)) {
 			return new ResponseEntity<>("Pet not found", HttpStatus.NO_CONTENT);
 		}
-		
+
 		petService.update(pet);
-		
+
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
+
 }

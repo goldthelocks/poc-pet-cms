@@ -18,6 +18,7 @@
 		"jquery": "components/jquery#~3.2.1",
 		"angular-ui-router": "1.0.6",
 		"bootstrap-table": "",
-		"angular-ui-select": ""
+		"angular-ui-select": "",
+		"angular-bootstrap": "2.5.0"
 	}
 }

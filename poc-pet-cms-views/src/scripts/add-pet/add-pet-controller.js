@@ -3,14 +3,20 @@
 angular.module('addPet')
 	.controller('AddPetController', ['$http', '$scope', function ($http, $scope) {
 		
+		$scope.setDefaults = function() {
+			$scope.displayError = false;
+			$scope.displaySuccess = false;
+			$scope.message = "";
+		};
+		
 		$scope.setDefaults();
 		
-		$scope.addNewPet = function(pet) {
+		$scope.addNewPet = function(pet) {			
 			$http.post('/api/pet/new', pet)
 				.then(function success(response) {
-				$scope.setMessage(false, "Successfully added pet!");
+				$scope.setMessage(false, response.message);
 			}, function error(response) {
-				$scope.setMessage(true, "Failed to add pet!");
+				$scope.setMessage(true, response.message);
 			});
 		};
 		
@@ -27,12 +33,6 @@ angular.module('addPet')
 			}
 			
 			$scope.message = message;
-		};
-		
-		$scope.setDefaults = function() {
-			$scope.displayError = false;
-			$scope.displaySuccess = false;
-			$scope.message = "";
 		};
 		
 	}]);

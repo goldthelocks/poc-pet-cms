@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ import com.poc.pet.cms.app.repository.PetRepository;
 @Transactional(rollbackOn = Exception.class)
 public class PetServiceImpl implements PetService {
 
+	private final static Logger logger = LoggerFactory.getLogger(PetServiceImpl.class);
+	
 	@Autowired
 	private PetRepository petRepository;
 
@@ -29,6 +33,7 @@ public class PetServiceImpl implements PetService {
 	public void save(Pet pet) {
 		pet.setStatus("active");
 		pet.setDateAdded(new Date());
+		logger.info(".....PET: " + pet.toString());
 		petRepository.save(pet);
 	}
 
