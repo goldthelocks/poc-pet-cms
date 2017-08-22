@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('addPet', ['ui.router', 'ui.select'])
+angular.module('addPet', ['ui.router', 'ui.select', 'ngAnimate', 'toastr'])
 	.config(['$stateProvider', function ($stateProvider) {
 		$stateProvider
 			.state('add-pet', {

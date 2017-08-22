@@ -1,22 +1,15 @@
 'use strict';
 
 angular.module('addPet')
-	.controller('AddPetController', ['$http', '$scope', function ($http, $scope) {
-		
-		$scope.setDefaults = function() {
-			$scope.displayError = false;
-			$scope.displaySuccess = false;
-			$scope.message = "";
-		};
-		
-		$scope.setDefaults();
+	.controller('AddPetController', ['$http', '$scope', 'toastr', function ($http, $scope, toastr) {
 		
 		$scope.addNewPet = function(pet) {			
 			$http.post('/api/pet/new', pet)
 				.then(function success(response) {
-				$scope.setMessage(false, response.message);
+				toastr.success(response.data.message);
+				setDefaults();
 			}, function error(response) {
-				$scope.setMessage(true, response.message);
+				toastr.error(response.data.message);
 			});
 		};
 		
@@ -25,14 +18,10 @@ angular.module('addPet')
 			$scope.petTypes = resp.data;
 		});
 		
-		$scope.setMessage = function(isError, message) {
-			if (isError) {
-				$scope.displayError = true;
-			} else {
-				$scope.displaySuccess = true;
-			}
-			
-			$scope.message = message;
-		};
+		var setDefaults = function() {
+			$scope.pet = {};
+			$scope.petForm.$setPristine();
+			$scope.petForm.$setUntouched();
+		}
 		
 	}]);

@@ -3,8 +3,6 @@
  */
 package com.poc.pet.cms.app.controller;
 
-import org.springframework.http.HttpStatus;
-
 /**
  * @author eotayde
  *

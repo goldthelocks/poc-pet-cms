@@ -1,7 +1,7 @@
 'use strict';
 
 var petListApp = angular.module('petListApp', [
-	'ui.router', 'ui.select', 'petList', 'addPet']);
+	'ui.router', 'ui.select', 'ngAnimate', 'toastr', 'petList', 'addPet', 'viewPet']);
 
 petListApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', function(
 		$stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
@@ -21,4 +21,11 @@ petListApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 
 	        url: '/',
 	        template: '<layout-welcome>Welcome!</layout-welcome>'
 	    });
+}]);
+
+petListApp.config(['toastrConfig', function(toastrConfig) {
+	angular.extend(toastrConfig, {
+		positionClass: 'toast-top-full-width',
+		closeButton: true
+	});
 }]);

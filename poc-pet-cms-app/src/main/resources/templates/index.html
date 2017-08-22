@@ -10,15 +10,18 @@
 	<base href="/" />
 	
 	<title>Pet Listing</title>
+	
+	<!-- CSS -->
 	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
 	<link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}"/>
 	<link rel="stylesheet" th:href="@{/css/style.css}"/>
 	
-	<!-- Bootstrap table -->
+	<!-- Extensions -->
 	<link rel="stylesheet" th:href="@{/bootstrap-table/dist/bootstrap-table.min.css}"/>
 	<link rel="stylesheet" th:href="@{/angular-ui-select/dist/select.min.css}"/>
+	<link rel="stylesheet" th:href="@{/angular-toastr/dist/angular-toastr.min.css}"/>
 	
-	
+	<!-- Scripts -->
 	<script th:src="@{/jquery/jquery.min.js}"></script>
 	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 	
@@ -32,10 +35,16 @@
 	
 	<script th:src="@{/scripts/add-pet/add-pet.js}"></script>
 	<script th:src="@{/scripts/add-pet/add-pet-controller.js}"></script>
-
+	
+	<script th:src="@{/scripts/view-pet/view-pet.js}"></script>
+	<script th:src="@{/scripts/view-pet/view-pet-controller.js}"></script>
+	
+	<!-- Extensions -->
 	<script th:src="@{/bootstrap-table/dist/bootstrap-table.min.js}"></script>
 	<script th:src="@{/angular-ui-select/dist/select.min.js}"></script>
-	
+	<script th:src="@{/angular-animate/angular-animate.min.js}"></script>
+	<script th:src="@{/angular-toastr/dist/angular-toastr.min.js}"></script>
+	<script th:src="@{/angular-toastr/dist/angular-toastr.tpls.min.js}"></script>
 	
 </head>
 
