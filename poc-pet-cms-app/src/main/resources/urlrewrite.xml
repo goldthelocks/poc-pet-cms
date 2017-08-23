@@ -18,5 +18,15 @@
 		<from>/add_pet</from>
 		<to>/</to>
 	</rule>
+	
+	<rule match-type="wildcard">
+		<from>/pet/*</from>
+		<to>/</to>
+	</rule>
+	
+	<rule match-type="wildcard">
+		<from>/pet/*/edit</from>
+		<to>/</to>
+	</rule>
 
 </urlrewrite>

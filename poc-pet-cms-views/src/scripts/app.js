@@ -1,7 +1,7 @@
 'use strict';
 
 var petListApp = angular.module('petListApp', [
-	'ui.router', 'ui.select', 'ngAnimate', 'toastr', 'petList', 'addPet', 'viewPet']);
+	'ui.router', 'ui.select', 'ngAnimate', 'toastr', 'petList', 'addPet', 'viewPet', 'editPet']);
 
 petListApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', function(
 		$stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {

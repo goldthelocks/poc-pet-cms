@@ -18,7 +18,7 @@ angular.module('petList')
 				title: 'Pet Id',
 				halign: 'center',
 				formatter: function(value, row, index) {
-					return '<a href="/view/' + value + '">' + value + '</a>';
+					return '<a href="/pet/' + value + '">' + value + '</a>';
 				},
 				sortable: true
 			}, {

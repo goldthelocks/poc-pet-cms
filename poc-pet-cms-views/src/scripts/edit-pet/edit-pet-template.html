@@ -1,6 +1,6 @@
-<h4>Add Pet</h4>
+<h4>Edit Pet</h4>
 
-<form class="form-horizontal" name="petForm" ng-submit="addNewPet(pet)"
+<form class="form-horizontal" name="petForm" ng-submit="editPet(pet)"
 	novalidate>
 
 	<div class="form-group" ng-class='{ "has-error" : petForm.name.$invalid && !petForm.name.$pristine }'>
@@ -39,8 +39,7 @@
 	<div class="form-group">
 		<div class="col-md-4 col-md-offset-4">
 			<button type="submit" class="btn btn-primary"
-				ng-disabled="petForm.$invalid">Add Pet</button>
-			<!-- <input type="submit" value="Add Pet" class="btn btn-primary" /> -->
+				ng-disabled="petForm.$invalid">Save Pet</button>
 		</div>
 	</div>
 

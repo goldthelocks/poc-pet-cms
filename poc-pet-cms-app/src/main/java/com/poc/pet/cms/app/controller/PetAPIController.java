@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poc.pet.cms.app.model.Pet;
@@ -86,32 +87,34 @@ public class PetAPIController {
 		return new ResponseEntity<CustomApiResponse>(new CustomApiResponse("Successfully added pet!"), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/api/pet/delete/{id}")
+	@DeleteMapping("/api/pet/delete")
 	@ApiOperation("Delete a pet")
-	public ResponseEntity<?> deletePet(@PathVariable("id") Long id) {
+	public ResponseEntity<CustomApiResponse> deletePet(@RequestParam("id") Long id) {
 		Pet pet = petService.findById(id);
 
 		if (!petService.isPetExisting(pet)) {
-			return new ResponseEntity<>("Pet not found", HttpStatus.NO_CONTENT);
+			return new ResponseEntity<CustomApiResponse>(new CustomApiResponse("Pet not found."),
+					HttpStatus.NO_CONTENT);
 		}
 
 		petService.delete(pet);
 
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<CustomApiResponse>(new CustomApiResponse("Pet deleted."), HttpStatus.OK);
 	}
 
 	@PutMapping("/api/pet/update/{id}")
 	@ApiOperation("Update a pet")
-	public ResponseEntity<?> updatePet(@PathVariable("id") Long id, @RequestBody Pet pet) {
+	public ResponseEntity<CustomApiResponse> updatePet(@PathVariable("id") Long id, @RequestBody Pet pet) {
 		Pet petFromRepo = petService.findById(id);
 
 		if (!petService.isPetExisting(petFromRepo)) {
-			return new ResponseEntity<>("Pet not found", HttpStatus.NO_CONTENT);
+			return new ResponseEntity<CustomApiResponse>(new CustomApiResponse("Pet not found."),
+					HttpStatus.NO_CONTENT);
 		}
 
 		petService.update(pet);
 
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<CustomApiResponse>(new CustomApiResponse("Successfully updated pet!"), HttpStatus.OK);
 	}
 
 }

@@ -5,7 +5,7 @@ angular.module('viewPet', ['ui.router'])
 		$stateProvider
 			.state('view-pet', {
 				parent: 'app',
-				url: '/view/:petId',
+				url: '/pet/:petId',
 				templateUrl: '/scripts/view-pet/view-pet-template.html',
 				controller: 'ViewPetController'
 			})

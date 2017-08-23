@@ -152,6 +152,7 @@ public class Pet {
 	@PrePersist
 	public void prePersist() {
 		final Date dateNow = new Date();
+		status = "active";
 		dateAdded = dateNow;
 		updateDate = dateNow;
 	}
@@ -159,6 +160,10 @@ public class Pet {
 	@PreUpdate
 	public void preUpdate() {
 		final Date dateNow = new Date();
+		
+		if (status == null) {
+			status = "active";
+		}
 		
 		if (dateAdded == null) {
 			dateAdded = dateNow;

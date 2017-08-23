@@ -9,7 +9,7 @@ angular.module('viewPet')
 			$scope.petId = data.id;
 			$scope.name = data.petDetails.name;
 			$scope.age = data.petDetails.age;
-			$scope.petType = data.petType.name;
+			$scope.petType = data.petType != null ? data.petType.name : null;
 			$scope.dateAdded = data.dateAdded;
 			$scope.updateDate = data.updateDate;
 			$scope.status = data.status;

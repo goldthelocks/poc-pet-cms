@@ -3,7 +3,6 @@
  */
 package com.poc.pet.cms.app.service;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -31,9 +30,6 @@ public class PetServiceImpl implements PetService {
 
 	@Override
 	public void save(Pet pet) {
-		pet.setStatus("active");
-		pet.setDateAdded(new Date());
-		logger.info(".....PET: " + pet.toString());
 		petRepository.save(pet);
 	}
 
